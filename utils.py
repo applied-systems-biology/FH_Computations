@@ -391,8 +391,8 @@ def run_factorh_simulations(n_runs, n_spheres, radius, deltas):
         for grid_point, count in zip(grid, grid_counter):
             result_data.append([grid_point[0], grid_point[1], grid_point[2], count, d])
 
-    # Convert the results to a DataFrame
-    return pd.DataFrame(result_data, columns=["x", "y", "z", "counter", "delta"])
+    # Convert the results to a DataFrame and remove all gridpoints with counter zero
+    return pd.DataFrame(result_data, columns=["x", "y", "z", "counter", "delta"]).query("counter != 0.0")
 
 
 def monte_carlo_simulation_fhr1(n_spheres, radius, deltai, deltaj, n_runs):
@@ -460,5 +460,5 @@ def run_fhr1_simulations(n_runs, n_spheres, radius, deltas, bend_both_dimensions
         for grid_point, count in zip(grid, grid_counter):
             result_data.append([grid_point[0], grid_point[1], grid_point[2], count, actual_delta])
 
-    # Convert the results to a DataFrame
-    return pd.DataFrame(result_data, columns=["x", "y", "z", "counter", "delta"])
+    # Convert the results to a DataFrame and remove all gridpoints with counter zero
+    return pd.DataFrame(result_data, columns=["x", "y", "z", "counter", "delta"]).query("counter != 0.0")
